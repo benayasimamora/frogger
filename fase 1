@@ -15,6 +15,12 @@ using namespace std;
 // Provided Enums
 enum tile_type {LILLYPAD, BANK, WATER, TURTLE, LOG};
 
+//-penjelasan [ben]
+// enum = mendefinisikan jenis-jenis ubin yang dapat ada di papan permainan, seperti LILLYPAD, BANK, WATER, TURTLE, dan LOG. Masing-masing tipe ini akan memiliki indeks yang sesuai.
+//enum (enumeration) di C++ adalah sebuah tipe data yang digunakan untuk mendefinisikan variabel yang memiliki nilai tetap dalam bentuk nama (identifier) yang mudah dibaca. Dengan menggunakan enum, kamu dapat memberi nama yang lebih deskriptif pada sekumpulan nilai tetap, sehingga membuat kode lebih mudah dipahami dan dikelola.
+
+
+
 ////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////  STRUCTS  //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
