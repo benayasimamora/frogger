@@ -51,21 +51,22 @@ int main(void) {
    
     init_board(game_board);
 
+    // Stage 1.1 Initialise the gameboard.
     // Read user input and place turtles.
     cout << "How many turtles? " << endl;
     int num_turtle;
     int turtle_x , turtle_y;
     cin >> num_turtle;
+    
     cout << "enter pairs: " << endl;
     for(int i = 0; i < num_turtle; i++){
-cin >> turtle_x >> turtle_y;
-if ((turtle_x > 0) && (turtle_x < 8) && (turtle_x >= 0) && (turtle_y <= 8) && (!game_board[turtle_x][turtle_x].occupied))
- game_board[turtle_x][turtle_y].type = TURTLE;
-    }
+        cin >> turtle_x >> turtle_y;
+        if ((turtle_x > 0) && (turtle_x < 8) && (turtle_x >= 0) && (turtle_y <= 8) && (!game_board[turtle_x][turtle_x].occupied))
+        game_board[turtle_x][turtle_y].type = TURTLE;
+        }
 
     // Start the game and print out the gameboard.
     cout << "Game Started" << endl;
-    
     print_board(game_board);
 
     cout << "Enter command: " << endl;
