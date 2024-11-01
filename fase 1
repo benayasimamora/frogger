@@ -83,10 +83,6 @@ for (int row = 0; row<SIZE; row++){
         board[row] [col].occupied = FALSE;
 if (row == 0){
 if (col % 2 ==0) board [row][col].type = LILLYPAD; else board [row][col].type = WATER;
-if 
-if (row == 0){
-if (col % 2 ==0) board [row][col].occupied = TRUE;
-}
 else if (row == 8){
     board[row][col].type = BANK;    
     if (col==4) board [row][col].occupied = TRUE;
