@@ -91,6 +91,9 @@ while (cin >> command) {
        else if (command == 'c'){
         cin >> x;
         if ((x > 0) && (x < 8)) clear_row(game_board , x);
+         
+        print_board(game_board);
+        cout << "Enter command: " << endl;
        }
     }
 
