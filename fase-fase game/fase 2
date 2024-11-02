@@ -16,6 +16,9 @@ using namespace std;
 #define SIZE        9
 #define TRUE        1
 #define FALSE       0
+#define XSTART      8
+#define YSTART      4
+
 
 // TODO: you may choose to add additional #defines here.
 
