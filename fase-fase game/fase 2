@@ -37,7 +37,8 @@ struct board_tile {
 
 // Prints out the current state of the board.
 void print_board(struct board_tile board[SIZE][SIZE]);
-void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end); // nambah funtion baru yaitu add_log
+void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end); // buat nambahin log
+void clear_row(struct board_tile board[SIZE][SIZE] , int x ); // buat clear row
 void init_board(struct board_tile board[SIZE][SIZE]);
 char type_to_char(enum tile_type type);
 
@@ -81,15 +82,16 @@ while (cin >> command) {
           
             cin >> x >> start_y >> end_y;
            
-            if (x > 0 && x < 8) {
-               add_log(game_board, x, start_y, end_y);
-            } else {
-                cout << "Logs cannot be placed in the top or bottom row!" << endl;
-            }
-        } // nambah ini
-        
-        print_board(game_board);
+            if (x > 0 && x < 8) add_log(game_board, x, start_y, end_y);
+            
+      print_board(game_board);
         cout << "Enter command: " << endl;
+
+        }
+       else if (command == 'c'){
+        cin >> x;
+        if ((x > 0) && (x < 8)) clear_row(game_board , x);
+       }
     }
 
     cout << "Thank you for playing Frogger Game!" << endl;
@@ -119,7 +121,17 @@ void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_en
     if (y_end > 8) y_end = 8;
     for (int i = 0; i < SIZE; i++){if (board[x][i].type == TURTLE) return;};
     for (int i = y_start; i < y_end; i++) board [x][i].type = LOG;
-} // nambah ini
+} // ++
+
+void clear_row(struct board_tile board[SIZE][SIZE] , int x){
+    for (int i = 0; i <= 8; i++){
+        if (board[x][i].occupied) return;
+    }
+    
+    for (int i = 0; i < SIZE; i++) {
+        board[x][i].type = WATER;
+}
+} // ++
 
 void print_board(struct board_tile board[SIZE][SIZE]) {
     for (int row = 0; row < SIZE; row++) {
