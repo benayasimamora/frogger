@@ -1,7 +1,7 @@
 // Program name
 //
 // This program was written by [Benaya(), Ezekiel (01082240022) , Tora() , Yoel() ] 
-// on [October 31 , 2024]
+// on October 31 , 2024 (Phase 1)  November dd , 2024 (Phase 2)
 //
 // TODO: Description of program
 
@@ -61,7 +61,7 @@ int main(void) {
     cout << "enter pairs: " << endl;
     for(int i = 0; i < num_turtle; i++){
         cin >> turtle_x >> turtle_y;
-        if ((turtle_x > 0) && (turtle_x < 8) && (turtle_x >= 1) && (turtle_y <= 8) && (!game_board[turtle_x][turtle_x].occupied))
+        if ((turtle_x > 0) && (turtle_x < 8) && (turtle_y >= 0) && (turtle_y <= 8) && (!game_board[turtle_x][turtle_x].occupied))
         game_board[turtle_x][turtle_y].type = TURTLE;
         }
 
