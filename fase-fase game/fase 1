@@ -66,7 +66,7 @@ int main(void) {
         cin >> turtle_x >> turtle_y;
           if ((turtle_x > 0)  && 
               (turtle_x < 8)  && 
-              (turtle_x >= 0) && 
+              (turtle_y >= 0) && 
               (turtle_y <= 8) && 
               (!game_board[turtle_x][turtle_x].occupied)) game_board[turtle_x][turtle_y].type = TURTLE;
         }
