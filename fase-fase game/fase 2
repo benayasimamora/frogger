@@ -39,6 +39,7 @@ struct board_tile {
 void print_board(struct board_tile board[SIZE][SIZE]);
 void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end); // buat nambahin log
 void clear_row(struct board_tile board[SIZE][SIZE] , int x ); // buat clear row
+void remove_log(struct board_tile board[SIZE][SIZE] , int x , int y);
 void init_board(struct board_tile board[SIZE][SIZE]);
 char type_to_char(enum tile_type type);
 
@@ -53,8 +54,6 @@ int main(void) {
    
     init_board(game_board);
 
-    // Stage 1.1 Initialise the gameboard.
-    // Read user input and place turtles.
     cout << "How many turtles? " << endl;
     int num_turtle;
     int turtle_x , turtle_y;
@@ -74,7 +73,7 @@ int main(void) {
 
     cout << "Enter command: " << endl;
    char command;
-    int x, start_y, end_y;
+    int x, y, start_y, end_y;
 
   
 while (cin >> command) {
@@ -91,7 +90,12 @@ while (cin >> command) {
        else if (command == 'c'){
         cin >> x;
         if ((x > 0) && (x < 8)) clear_row(game_board , x);
-         
+        print_board(game_board);
+        cout << "Enter command: " << endl;
+       }
+       else if (command == 'r'){
+        cin >> x >>  y;
+        if (( x > 0) && (x < 8)) clear_row(game_board, x);
         print_board(game_board);
         cout << "Enter command: " << endl;
        }
@@ -135,6 +139,27 @@ void clear_row(struct board_tile board[SIZE][SIZE] , int x){
         board[x][i].type = WATER;
 }
 } // ++
+
+void remove_log(struct board_tile board[SIZE][SIZE], int x, int y) {
+    for (int i = 0; i <= 8; i++) {
+        if (board[x][i].occupied) return;
+    }
+    if (board[x][y].type != LOG) return;
+    else board[x][y].type = WATER;
+    
+    int i = y + 1, j = y - 1;
+
+    while (board[x][i].type == LOG) {
+        board[x][i].type = WATER;
+        i++;
+    }
+
+    while (board[x][j].type == LOG) {
+        board[x][j].type = WATER;
+        j--;
+    }
+} // ++
+
 
 void print_board(struct board_tile board[SIZE][SIZE]) {
     for (int row = 0; row < SIZE; row++) {
