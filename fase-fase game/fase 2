@@ -37,7 +37,7 @@ struct board_tile {
 
 // Prints out the current state of the board.
 void print_board(struct board_tile board[SIZE][SIZE]);
-void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end); // nambah ini
+void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end); // nambah funtion baru yaitu add_log
 void init_board(struct board_tile board[SIZE][SIZE]);
 char type_to_char(enum tile_type type);
 
