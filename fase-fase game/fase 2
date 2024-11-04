@@ -1,7 +1,7 @@
 // Program name
 //
 // This program was written by [Benaya(), Ezekiel (01082240022) , Tora() , Yoel() ] 
-// on [November 2 , 2024]
+// on [October 31 , 2024]
 //
 // TODO: Description of program
 
@@ -20,35 +20,24 @@ using namespace std;
 #define YSTART      4
 
 
-// TODO: you may choose to add additional #defines here.
 
-// Provided Enums
 enum tile_type {LILLYPAD, BANK, WATER, TURTLE, LOG};
 
 
-// Provided structs
+
 struct board_tile {
-    enum tile_type type; // The type of piece it is (water, bank, etc.)
-    int occupied;        // TRUE or FALSE based on if Frogger is there.
+    enum tile_type type; 
+    int occupied;        
 };
 
-////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////  FUNCTION PROTOTYPES  ////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
-// TODO: Your function prototypes here
-
-// Prints out the current state of the board.
 void print_board(struct board_tile board[SIZE][SIZE]);
-void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end); // buat nambahin log
-void clear_row(struct board_tile board[SIZE][SIZE] , int x ); // buat clear row
+void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end);
+void clear_row(struct board_tile board[SIZE][SIZE] , int x );
 void remove_log(struct board_tile board[SIZE][SIZE] , int x , int y);
 void init_board(struct board_tile board[SIZE][SIZE]);
 char type_to_char(enum tile_type type);
 
-////////////////////////////////////////////////////////////////////////////////
-//////////////////////////  FUNCTION IMPLEMENTATIONS  //////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
 int main(void) {
 
@@ -57,6 +46,7 @@ int main(void) {
    
     init_board(game_board);
 
+    
     cout << "How many turtles? " << endl;
     int num_turtle;
     int turtle_x , turtle_y;
@@ -69,7 +59,7 @@ int main(void) {
         game_board[turtle_x][turtle_y].type = TURTLE;
         }
 
-    // Start the game and print out the gameboard.
+
     cout << "Game Started" << endl;
     print_board(game_board);
 
@@ -77,32 +67,30 @@ int main(void) {
     cout << "Enter command: " << endl;
    char command;
     int x, y, start_y, end_y;
+    int x_frog = XSTART;
+    int y_frog = YSTART;
 
   
 while (cin >> command) {
-        if (command == 'l') {
-          
-            cin >> x >> start_y >> end_y;
-           
-            if (x > 0 && x < 8) add_log(game_board, x, start_y, end_y);
-            
-      print_board(game_board);
+    if (command == 'l') {
+        cin >> x >> start_y >> end_y;
+        if (x > 0 && x < 8) add_log(game_board, x, start_y, end_y);
+        print_board(game_board);
         cout << "Enter command: " << endl;
-
-        }
-       else if (command == 'c'){
+    }
+    else if (command == 'c') {
         cin >> x;
-        if ((x > 0) && (x < 8)) clear_row(game_board , x);
+        if ((x > 0) && (x < 8)) clear_row(game_board, x);
         print_board(game_board);
         cout << "Enter command: " << endl;
-       }
-       else if (command == 'r'){
-        cin >> x >>  y;
-        if (( x > 0) && (x < 8)) clear_row(game_board, x);
+    }
+    else if (command == 'r') {
+        cin >> x >> y;
+        if ((x > 0) && (x < 8)) remove_log(game_board, x, y);
         print_board(game_board);
         cout << "Enter command: " << endl;
-       }
-        else if (command == 'w') {  
+    }
+    else if (command == 'w') {  
         if (x_frog > 0) {  
             game_board[x_frog][y_frog].occupied = FALSE;  
             x_frog -= 1; 
@@ -111,7 +99,7 @@ while (cin >> command) {
         print_board(game_board); 
         cout << "Enter command: " << endl;
     }
-            else if (command == 'a') {  
+    else if (command == 'a') {  
         if (y_frog > 0) {  
             game_board[x_frog][y_frog].occupied = FALSE;  
             y_frog -= 1;  
@@ -120,7 +108,7 @@ while (cin >> command) {
         print_board(game_board);  
         cout << "Enter command: " << endl;
     }
-            else if (command == 's') {  
+    else if (command == 's') {  
         if (x_frog < SIZE - 1) {  
             game_board[x_frog][y_frog].occupied = FALSE;  
             x_frog += 1;  
@@ -129,7 +117,7 @@ while (cin >> command) {
         print_board(game_board);  
         cout << "Enter command: " << endl;
     }
-            else if (command == 'd') {  
+    else if (command == 'd') {  
         if (y_frog < SIZE - 1) {  
             game_board[x_frog][y_frog].occupied = FALSE; 
             y_frog += 1; 
@@ -138,6 +126,7 @@ while (cin >> command) {
         print_board(game_board);  
         cout << "Enter command: " << endl;
     }
+}
 
     cout << "Thank you for playing Frogger Game!" << endl;
     return 0;
@@ -164,9 +153,9 @@ else{
 void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end){
     if (y_start < 0) y_start = 0;
     if (y_end > 8) y_end = 8;
-    for (int i = 0; i < SIZE; i++){if (board[x][i].type == TURTLE) return;};
-    for (int i = y_start; i < y_end; i++) board [x][i].type = LOG;
-} // ++
+    for (int i = 0; i < SIZE; i++){if (board[x][i].type == TURTLE) return;}
+    for (int i = y_start; i <= y_end; i++) board [x][i].type = LOG;
+}
 
 void clear_row(struct board_tile board[SIZE][SIZE] , int x){
     for (int i = 0; i <= 8; i++){
@@ -176,7 +165,7 @@ void clear_row(struct board_tile board[SIZE][SIZE] , int x){
     for (int i = 0; i < SIZE; i++) {
         board[x][i].type = WATER;
 }
-} // ++
+}
 
 void remove_log(struct board_tile board[SIZE][SIZE], int x, int y) {
     for (int i = 0; i <= 8; i++) {
@@ -196,7 +185,7 @@ void remove_log(struct board_tile board[SIZE][SIZE], int x, int y) {
         board[x][j].type = WATER;
         j--;
     }
-} // ++
+}
 
 
 void print_board(struct board_tile board[SIZE][SIZE]) {
