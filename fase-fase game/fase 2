@@ -102,6 +102,41 @@ while (cin >> command) {
         print_board(game_board);
         cout << "Enter command: " << endl;
        }
+        else if (command == 'w') {  
+        if (x_frog > 0) {  
+            game_board[x_frog][y_frog].occupied = FALSE;  
+            x_frog -= 1; 
+            game_board[x_frog][y_frog].occupied = TRUE; 
+        }
+        print_board(game_board); 
+        cout << "Enter command: " << endl;
+    }
+            else if (command == 'a') {  
+        if (y_frog > 0) {  
+            game_board[x_frog][y_frog].occupied = FALSE;  
+            y_frog -= 1;  
+            game_board[x_frog][y_frog].occupied = TRUE;  
+        }
+        print_board(game_board);  
+        cout << "Enter command: " << endl;
+    }
+            else if (command == 's') {  
+        if (x_frog < SIZE - 1) {  
+            game_board[x_frog][y_frog].occupied = FALSE;  
+            x_frog += 1;  
+            game_board[x_frog][y_frog].occupied = TRUE; 
+        }
+        print_board(game_board);  
+        cout << "Enter command: " << endl;
+    }
+            else if (command == 'd') {  
+        if (y_frog < SIZE - 1) {  
+            game_board[x_frog][y_frog].occupied = FALSE; 
+            y_frog += 1; 
+            game_board[x_frog][y_frog].occupied = TRUE; 
+        }
+        print_board(game_board);  
+        cout << "Enter command: " << endl;
     }
 
     cout << "Thank you for playing Frogger Game!" << endl;
