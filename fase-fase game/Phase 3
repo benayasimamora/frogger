@@ -1,9 +1,9 @@
-// Program name
+// Frogger Game
 //
 // This program was written by [Benaya(), Ezekiel (01082240022) , Tora() , Yoel() ] 
 // on [November 12 , 2024]
 //
-// TODO: Description of program
+
 
 #include <iostream>
 using namespace std;
@@ -12,7 +12,6 @@ using namespace std;
 //////////////////////////////////  CONSTANTS  /////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-// Provided constants
 #define SIZE        9
 #define TRUE        1
 #define FALSE       0
@@ -28,6 +27,7 @@ enum tile_type {LILLYPAD, BANK, WATER, TURTLE, LOG};
 struct board_tile {
     enum tile_type type; 
     int occupied;        
+    int bug_present;
 };
 
 
@@ -36,7 +36,7 @@ void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_en
 void clear_row(struct board_tile board[SIZE][SIZE] , int x );
 void remove_log(struct board_tile board[SIZE][SIZE] , int x , int y);
 void move_frog(struct board_tile board[SIZE][SIZE] , char, int*  , int* );
-
+void add_bug(struct board_tile board[SIZE][SIZE] , int x_bug, int y_bug);
 
 void init_board(struct board_tile board[SIZE][SIZE]);
 char type_to_char(enum tile_type type);
@@ -82,6 +82,15 @@ while (cin >> command) {
         print_board(game_board);
         cout << "Enter command: " << endl;
     }
+    else if (command == 'b') {
+        int x_bug, y_bug;
+
+        cin >> x_bug >> y_bug;
+        if ((x > 0) && (x < 8)) add_bug(game_board, x_bug , y_bug);
+        print_board(game_board);
+        cout << "Enter command: " << endl;
+    }
+    
     else if (command == 'c') {
         cin >> x;
         if ((x > 0) && (x < 8)) clear_row(game_board, x);
@@ -110,11 +119,11 @@ while (cin >> command) {
             break;
             } else {
                 game_board[x_frog][y_frog].occupied = FALSE;
-                cout << "LIVES LEFT : " << lives << endl;
                 x_frog = XSTART;
                 y_frog = YSTART;
                 game_board[x_frog][y_frog].occupied = TRUE;
                 print_board(game_board);
+                 cout << "LIVES LEFT : " << lives << endl;
                 cout << "Enter command: " << endl;
             }
         } else {
@@ -133,6 +142,7 @@ void init_board(struct board_tile board[SIZE][SIZE])
 for (int row = 0; row<SIZE; row++){
     for (int col = 0; col < SIZE; col++){
         board[row] [col].occupied = FALSE;
+        board[row] [col].bug_present = FALSE;
 if (row == 0){
 if (col % 2 ==0) board [row][col].type = LILLYPAD; else board [row][col].type = WATER;}
 else if (row == 8){
@@ -215,6 +225,13 @@ if(temp_y + 1 <= 8){
     *y_frog = temp_y; 
 }
 
+void add_bug(struct board_tile board[SIZE][SIZE] , int x_bug, int y_bug){
+    if((y_bug >= 0) && (y_bug <= 8)){
+        if((board[x_bug][y_bug].type == LOG) || (board[x_bug][y_bug].type == TURTLE)){
+        board[x_bug][y_bug].bug_present = TRUE;
+    }
+    }
+}
 
 void print_board(struct board_tile board[SIZE][SIZE]) {
     for (int row = 0; row < SIZE; row++) {
@@ -222,6 +239,8 @@ void print_board(struct board_tile board[SIZE][SIZE]) {
             char type_char = '\0';
             if (board[row][col].occupied) {
                 type_char = 'F';
+            } else if (board[row][col].bug_present){
+type_char = 'B';
             } else {
                 type_char = type_to_char(board[row][col].type);
             }
