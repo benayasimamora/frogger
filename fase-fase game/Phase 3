@@ -8,28 +8,19 @@
 #include <iostream>
 using namespace std;
 
-////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////  CONSTANTS  /////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
 #define SIZE        9
 #define TRUE        1
 #define FALSE       0
 #define XSTART      8
 #define YSTART      4
 
-
-
 enum tile_type {LILLYPAD, BANK, WATER, TURTLE, LOG};
-
-
 
 struct board_tile {
     enum tile_type type; 
     int occupied;        
     int bug_present;
 };
-
 
 void print_board(struct board_tile board[SIZE][SIZE]);
 void add_log(struct board_tile board[SIZE][SIZE] , int x , int y_start, int y_end);
@@ -41,14 +32,12 @@ void add_bug(struct board_tile board[SIZE][SIZE] , int x_bug, int y_bug);
 void init_board(struct board_tile board[SIZE][SIZE]);
 char type_to_char(enum tile_type type);
 
-
 int main(void) {
 
     cout << "Welcome to Frogger Game" << endl;
     struct board_tile game_board[SIZE][SIZE];
    
     init_board(game_board);
-
     
     cout << "How many turtles? " << endl;
     int num_turtle;
@@ -62,10 +51,8 @@ int main(void) {
         game_board[turtle_x][turtle_y].type = TURTLE;
         }
 
-
     cout << "Game Started" << endl;
     print_board(game_board);
-
 
     cout << "Enter command: " << endl;
    char command;
@@ -73,7 +60,6 @@ int main(void) {
     int x_frog = XSTART;
     int y_frog = YSTART;
     int lives = 3;
-
   
 while (cin >> command) {
     if (command == 'l') {
@@ -117,7 +103,7 @@ while (cin >> command) {
             if (lives == 0){
             cout << " !! GAME OVER YOU LOST !! " << endl;
             break;
-            } else {
+            }   else {
                 game_board[x_frog][y_frog].occupied = FALSE;
                 x_frog = XSTART;
                 y_frog = YSTART;
@@ -249,8 +235,6 @@ type_char = 'B';
         cout << endl;
     }
 }
-
-
 
 char type_to_char(enum tile_type type) {
     char type_char = ' ';
