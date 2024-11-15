@@ -14,7 +14,7 @@ using namespace std;
 #define XSTART      8
 #define YSTART      4
 
-enum tile_type {LILLYPAD, BANK, WATER, TURTLE, LOG};
+enum tile_type {LILLYPAD, BANK, WATER, TURTLE, LOG , BUG};
 
 struct board_tile {
     enum tile_type type; 
@@ -97,7 +97,19 @@ while (cin >> command) {
             print_board(game_board);
             cout << " Yippieee!! You Won! " << endl;
             break;
-        } else if (game_board[x_frog][y_frog].type == WATER){
+        } else if (game_board[x_frog][y_frog].bug_present == TRUE) {
+            print_board(game_board);
+            lives = lives - 1;
+            cout << "LIVES LEFT : " << lives << endl;
+                cout << "Enter command: " << endl;
+            
+            if (lives == 0){
+            cout << " !! GAME OVER YOU LOST !! " << endl;
+            
+            break;
+            }
+            }
+        else if (game_board[x_frog][y_frog].type == WATER) {
             print_board(game_board);
             lives = lives - 1;
             if (lives == 0){
@@ -109,7 +121,7 @@ while (cin >> command) {
                 y_frog = YSTART;
                 game_board[x_frog][y_frog].occupied = TRUE;
                 print_board(game_board);
-                 cout << "LIVES LEFT : " << lives << endl;
+                cout << "LIVES LEFT : " << lives << endl;
                 cout << "Enter command: " << endl;
             }
         } else {
@@ -236,6 +248,7 @@ type_char = 'B';
     }
 }
 
+
 char type_to_char(enum tile_type type) {
     char type_char = ' ';
     if (type == LILLYPAD) {
@@ -248,6 +261,8 @@ char type_to_char(enum tile_type type) {
         type_char = 'T';
     } else if (type == LOG) {
         type_char = 'L';
+    } else if (type == BUG){
+        type_char = 'B';
     }
     return type_char;
 }
