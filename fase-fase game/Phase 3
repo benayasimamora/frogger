@@ -217,6 +217,9 @@ void move_bug(struct board_tile board[SIZE][SIZE]) {
                 if (board[row][new_col].type == LOG || board[row][new_col].type == TURTLE) {
                     board[row][new_col].bug_present = TRUE;
                 }
+                else if (board[row][new_col].type == WATER){
+                board[row][prev_col].bug_present = TRUE;
+}
             }
         }
     }
